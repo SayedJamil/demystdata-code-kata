@@ -6,7 +6,7 @@ The link to the task is [here](https://github.com/DemystData/code-kata/blob/main
 
 To run the application:
 
-```http
+```
   docker-compose up
 ```
 
