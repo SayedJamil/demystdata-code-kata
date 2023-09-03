@@ -1,0 +1,26 @@
+main {
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  article {
+    flex: 1 0 0;
+  }
+
+  footer {
+    flex: 0 1 0;
+  }
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 0 1rem;
+}
+
+.balancePage {
+  display: flex;
+  flex-direction: column;
+}
