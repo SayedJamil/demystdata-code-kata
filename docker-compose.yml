@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: code-kata-server
+    container_name: code-kata-node-server
+    command: /app/node_modules/.bin/nodemon src/index.ts
+    volumes:
+      - ./server/:/app
+      - /app/node_modules
+    ports:
+      - "8787:8787"
+    depends_on:
+      - mongo
+    env_file: ./server/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+  mongo:
+    image: mongo
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: code-kata-client
+    container_name: code-kata-vite-client
+    command: yarn dev
+    volumes:
+      - ./client/:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "5656:5656"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+  node_modules:
+  web-root:
+    driver: local
